@@ -3,6 +3,12 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
+import authRouter from './routes/auth.routes.js';
+import booksRouter from './routes/books.routes.js';
+import reviewsRouter from './routes/reviews.routes.js';
+import orderRouter from './routes/order.routes.js';
+import cartRouter from './routes/cart.routes.js';
+
 
 dotenv.config();
 
@@ -22,6 +28,12 @@ app.use(
 );
 
 const PORT = process.env.PORT || 3000;
+
+app.use("/api/v1/auth", authRouter)
+app.use("/api/v1/books", booksRouter)
+app.use("/api/v1/reviews", reviewsRouter)
+app.use("/api/v1/order", orderRouter)
+app.use("/api/v1/cart", cartRouter)
 
 app.get('/', (req, res) => {
     res. send("Hello world");
