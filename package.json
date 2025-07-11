@@ -10,6 +10,7 @@
   "author": "Gitesh",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^6.11.1",
     "bcryptjs": "^3.0.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -19,6 +20,7 @@
     "prettier": "^3.6.2"
   },
   "devDependencies": {
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "prisma": "^6.11.1"
   }
 }
