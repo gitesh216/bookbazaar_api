@@ -36,7 +36,7 @@ app.use("/api/v1/order", orderRouter)
 app.use("/api/v1/cart", cartRouter)
 
 app.get('/', (req, res) => {
-    res. send("Hello world");
+    res.send("Hello world");
 })
 
 app.listen(PORT, () => {
