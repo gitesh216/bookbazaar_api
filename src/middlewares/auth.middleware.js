@@ -36,7 +36,6 @@ const verifyJWT = asyncHandler(async (req, res, next) => {
 const checkAdmin = asyncHandler(async (req, res, next) => {
     try {
         const userId = req.user?.id;
-
         const user = await db.user.findUnique({
             where: {
                 id: userId,
@@ -45,6 +44,7 @@ const checkAdmin = asyncHandler(async (req, res, next) => {
                 role: true,
             },
         });
+    
         if (!user || user.role !== "ADMIN") {
             throw new ApiError(403, "Access denied - Admin only");
         }

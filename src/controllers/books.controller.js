@@ -1,4 +1,4 @@
-import { asyncHandler } from "../utils/async-handler";
+import { asyncHandler } from "../utils/async-handler.js";
 import { ApiError } from "../utils/api-error.js";
 import { ApiResponse } from "../utils/api-response.js";
 import { db } from "../libs/db.js";
@@ -105,7 +105,7 @@ const deleteBook = asyncHandler(async (req, res) => {
 });
 
 const getAllBooks = asyncHandler(async (req, res) => {
-    const books = await db.book.finaMany();
+    const books = await db.book.findMany();
     if (!books) {
         throw new ApiError(500, "Error in fetching books");
     }
