@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 3000;
 app.use("/api/v1/auth", authRouter)
 app.use("/api/v1/books", booksRouter)
 app.use("/api/v1/reviews", reviewsRouter)
-app.use("/api/v1/order", orderRouter)
+app.use("/api/v1/orders", orderRouter)
 app.use("/api/v1/cart", cartRouter)
 
 app.get('/', (req, res) => {
