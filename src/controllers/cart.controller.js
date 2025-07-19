@@ -32,13 +32,13 @@ const addBookToCart = asyncHandler(async (req, res) => {
     if (!userId) {
         throw new ApiError(400, "User ID is required");
     }
-    if (!book) {
+    if (!bookToAdd) {
         throw new ApiError(400, "Book data is required");
     }
 
     const book = await db.book.findUnique({
         where: {
-            id: bookToAdd.bookId,
+            id: bookToAdd?.bookId,
         },
     });
     if (!book) {
@@ -54,8 +54,10 @@ const addBookToCart = asyncHandler(async (req, res) => {
 
     const cartItem = await db.cartItem.findUnique({
         where: {
-            userId,
-            bookId: bookToAdd.bookId,
+            userId_bookId: {
+                userId: userId,
+                bookId: bookToAdd.bookId,
+            },
         },
     });
 
@@ -64,7 +66,7 @@ const addBookToCart = asyncHandler(async (req, res) => {
             quantity: cartItem.quantity + bookToAdd.quantity,
         });
     } else {
-        const newCartItem = await db.cartItem.caret({
+        const newCartItem = await db.cartItem.create({
             data: {
                 bookId: bookToAdd.bookId,
                 userId,
@@ -91,7 +93,7 @@ const updateCartQuantity = asyncHandler(async (req, res) => {
     if (!userId) {
         throw new ApiError(400, "User ID is required");
     }
-    if (!book) {
+    if (!bookToAdd) {
         throw new ApiError(400, "Book data is required");
     }
 
@@ -113,8 +115,10 @@ const updateCartQuantity = asyncHandler(async (req, res) => {
 
     const cartItem = await db.cartItem.findUnique({
         where: {
-            userId,
-            bookId: bookToAdd.bookId,
+            userId_bookId: {
+                userId,
+                bookId: bookToAdd.bookId,
+            },
         },
     });
 
@@ -122,17 +126,28 @@ const updateCartQuantity = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Cart not found");
     }
 
-    await db.cartItem.update({
-        quantity: cartItem.quantity + bookToAdd.quantity,
+    const updatedCartItem = await db.cartItem.update({
+        where: {
+            id: cartItem.id,
+        },
+        data: {
+            quantity: bookToAdd.quantity,
+        },
     });
 
     return res
         .status(201)
-        .json(new ApiResponse(201, cartItem, "Cart item updated successfully"));
+        .json(
+            new ApiResponse(
+                201,
+                updatedCartItem,
+                "Cart item updated successfully",
+            ),
+        );
 });
 
 const removeBook = asyncHandler(async (req, res) => {
-    const { cartId } = req.body;
+    const { cartId } = req.params;
     const userId = req.user?.id;
     if (!userId) {
         throw new ApiError(400, "User ID is required");
@@ -202,5 +217,5 @@ export {
     clearCart,
     removeBook,
     updateCartQuantity,
-    getAllCartItems
-}
+    getAllCartItems,
+};

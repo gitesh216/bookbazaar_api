@@ -38,10 +38,10 @@ const createOrder = asyncHandler(async (req, res) => {
         await db.book.update({
             where: {
                 id: item.bookId,
-                data: {
-                    stock: {
-                        decrement: item.quantity,
-                    },
+            },
+            data: {
+                stock: {
+                    decrement: item.quantity,
                 },
             },
         });
@@ -73,7 +73,7 @@ const createOrder = asyncHandler(async (req, res) => {
         },
     });
 
-    if(!order) {
+    if (!order) {
         throw new ApiError(500, "Failed to create order");
     }
 
@@ -85,7 +85,7 @@ const createOrder = asyncHandler(async (req, res) => {
 const getAllOrders = asyncHandler(async (req, res) => {
     const userId = req.user?.id;
 
-    if(!userId) {
+    if (!userId) {
         throw new ApiError(400, "User ID is required");
     }
 
@@ -106,7 +106,7 @@ const getAllOrders = asyncHandler(async (req, res) => {
         },
     });
 
-    if(!orders) {
+    if (!orders) {
         throw new ApiError(500, "Failed to fetch orders");
     }
 
