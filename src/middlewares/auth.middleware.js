@@ -44,7 +44,7 @@ const checkAdmin = asyncHandler(async (req, res, next) => {
                 role: true,
             },
         });
-    
+
         if (!user || user.role !== "ADMIN") {
             throw new ApiError(403, "Access denied - Admin only");
         }
@@ -54,4 +54,28 @@ const checkAdmin = asyncHandler(async (req, res, next) => {
     }
 });
 
-export { verifyJWT, checkAdmin };
+// middlewares/verifyApiKey.js
+export const verifyApiKey = asyncHandler(async (req, res, next) => {
+    const apiKey = req.headers["x-api-key"];
+    const userId = req.user?.id;
+
+    if (!apiKey || !userId) {
+        return res
+            .status(401)
+            .json({ message: "API key missing or user ID missing" });
+    }
+
+    const apiKeyRecord = db.apiKey.findUnique({
+        where: {
+            userId,
+            key: apiKey,
+        },
+    });
+    if (!apiKeyRecord) {
+        throw new ApiError(401, "Unauthorized - Invalid API key");
+    }
+
+    next();
+});
+
+export { verifyJWT, checkAdmin, verifyApiKey };
