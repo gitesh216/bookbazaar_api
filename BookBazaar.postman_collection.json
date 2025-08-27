@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "2c614542-2681-4491-b6d0-563c7bdf117b",
+		"name": "BookBazaar",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "42990335"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"One\",\r\n    \"email\": \"one1@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"One\",\r\n    \"email\": \"one1@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/auth/login"
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/auth/logout"
+					},
+					"response": []
+				},
+				{
+					"name": "get-api-key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"one1@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/auth/api-key"
+					},
+					"response": []
+				},
+				{
+					"name": "get-profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/auth/profile"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "add-book",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Steve Jobs\",\r\n  \"author\": \"Walter Isaacson\",\r\n  \"description\": \"A biography of Apple’s co-founder, based on over forty interviews with Jobs over two years.\",\r\n  \"genre\": \"Biography\",\r\n  \"price\": 649.00,\r\n  \"stock\": 25\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/books/add-book"
+					},
+					"response": []
+				},
+				{
+					"name": "update-book",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Steve Jobs\",\r\n  \"author\": \"Walter Isaacson\",\r\n  \"description\": \"A biography of Apple’s co-founder, based on over forty interviews with Jobs over two years.\",\r\n  \"genre\": \"Biography\",\r\n  \"price\": 1649.00,\r\n  \"stock\": 25\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/books/update/608f4073-304c-4d0d-acff-8ac1369f50f6"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/books/delete/608f4073-304c-4d0d-acff-8ac1369f50f6"
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-books",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/books/get-all-books"
+					},
+					"response": []
+				},
+				{
+					"name": "get-book",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/books/get-book/da59cfea-f2e3-4bfa-bd6a-7b776a7e693e"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "add-review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rating\": 5,\r\n  \"comment\": \"Must-read for every serious developer. Changed the way I write code.\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/reviews/book/b29aaa5e-a84f-4094-9cf4-1be03931f686"
+					},
+					"response": []
+				},
+				{
+					"name": "delete-review",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/reviews/book/da59cfea-f2e3-4bfa-bd6a-7b776a7e693e"
+					},
+					"response": []
+				},
+				{
+					"name": "get-review",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/reviews/book/b29aaa5e-a84f-4094-9cf4-1be03931f686"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "create-order",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"items\": [\r\n        {\r\n            \"bookId\": \"da59cfea-f2e3-4bfa-bd6a-7b776a7e693e\",\r\n            \"quantity\": 3\r\n        },\r\n        {\r\n            \"bookId\": \"ebdd0934-be20-4051-b48b-a135de29a3bf\",\r\n            \"quantity\": 3\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "get-all-orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/orders"
+					},
+					"response": []
+				},
+				{
+					"name": "get-oder",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"rating\": 5,\r\n  \"comment\": \"Must-read for every serious developer. Changed the way I write code.\"\r\n}\r\n"
+						},
+						"url": "http://127.0.0.1:3000/api/v1/orders/e922e77b-57ef-49fc-8ca3-57fa2b561c4f"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cart",
+			"item": [
+				{
+					"name": "get-all-cartItems",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/cart"
+					},
+					"response": []
+				},
+				{
+					"name": "add-book-cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookToAdd\": {\r\n        \"bookId\": \"b29aaa5e-a84f-4094-9cf4-1be03931f686\",\r\n        \"quantity\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/cart"
+					},
+					"response": []
+				},
+				{
+					"name": "update-quantity",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"bookToAdd\": {\r\n        \"bookId\": \"b29aaa5e-a84f-4094-9cf4-1be03931f686\",\r\n        \"quantity\": 4\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/api/v1/cart/23c5835f-d7ba-4b67-83bd-a92d53084e21"
+					},
+					"response": []
+				},
+				{
+					"name": "remove-book",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/cart/remove/05f2622e-2928-4ebc-bbd8-a82abf1e9aac"
+					},
+					"response": []
+				},
+				{
+					"name": "clear-cart",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:3000/api/v1/cart/clear"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
