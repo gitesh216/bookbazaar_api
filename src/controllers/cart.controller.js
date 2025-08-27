@@ -15,7 +15,7 @@ const getAllCartItems = asyncHandler(async (req, res) => {
         },
     });
 
-    if (!cartItems) {
+    if (cartItems.length === 0) {
         throw new ApiError(500, "Cart items not found");
     }
 
@@ -63,7 +63,12 @@ const addBookToCart = asyncHandler(async (req, res) => {
 
     if (cartItem) {
         await db.cartItem.update({
+            where: {
+                id: cartItem.id,
+            },
+            data: {
             quantity: cartItem.quantity + bookToAdd.quantity,
+            }
         });
     } else {
         const newCartItem = await db.cartItem.create({
@@ -106,7 +111,7 @@ const updateCartQuantity = asyncHandler(async (req, res) => {
         throw new ApiError(400, "Requested book id not found");
     }
 
-    if (bookToAdd.quantity > book.stock) {
+    if ((cartItem?.quantity || 0) + bookToAdd.quantity > book.stock) {
         throw new ApiError(
             401,
             "The quantity of book exceed the available book stock",
@@ -139,7 +144,7 @@ const updateCartQuantity = asyncHandler(async (req, res) => {
         .status(201)
         .json(
             new ApiResponse(
-                201,
+                200,
                 updatedCartItem,
                 "Cart item updated successfully",
             ),
@@ -161,8 +166,8 @@ const removeBook = asyncHandler(async (req, res) => {
             id: cartId,
         },
     });
-    if (!cartItem) {
-        throw new ApiError(400, "Cart item not found");
+    if (!cartItem || cartItem.userId !== userId) {
+        throw new ApiError(403, "Cart item not found or Unauthorized request");
     }
 
     const deleteCart = await db.cartItem.delete({
