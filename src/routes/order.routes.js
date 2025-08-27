@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { createOrder, getAllOrders, getOrder } from "../controllers/orders.controller.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { verifyApiKey, verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.post("/", verifyJWT, createOrder);
+router.post("/", verifyJWT, verifyApiKey, createOrder);
 router.get("/", verifyJWT, getAllOrders);
 router.get("/:orderId", verifyJWT, getOrder);
 
